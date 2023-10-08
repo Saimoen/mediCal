@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>Résultats de la recherche : {{ searchQuery }}</h1>
+  <div class="row">
+    <div class="col-lg-6">
+      <!-- Blog post 1 -->
+      <div class="card mb-4" *ngFor="let blog of blogSearched">
+        <a href="#!">
+          <img class="card-img-top img-fluid" [src]="blog.image" alt="..." />
+        </a>
+        <div class="card-body">
+          <div class="small text-muted">January 1, 2023</div>
+          <h2 class="card-title h4">{{ blog.titre }}</h2>
+          <p class="card-text text-break">{{ blog.content }}</p>
+          <div class="row">
+            <div class="col-6">
+              <a class="btn btn-primary">Read more →</a>
+            </div>
+            <div class="col-6">
+              <button>Supprimer le blog</button>
+              <span
+                class="badge rounded-pill text-bg-dark"
+                style="margin-left: 6rem"
+                >{{ blog.category }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

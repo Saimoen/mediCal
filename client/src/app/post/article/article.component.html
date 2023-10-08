@@ -1,0 +1,25 @@
+<article>
+  <!-- Post header-->
+  <header class="mb-4">
+    <!-- Post title-->
+    <h1 class="fw-bolder mb-1">{{ blogs?.titre }}</h1>
+    <!-- Post meta content-->
+    <div class="text-muted fst-italic mb-2">
+      Posted on January 1, 2023 by Start Bootstrap
+    </div>
+    <!-- Post categories-->
+    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{
+      blogs?.category
+    }}</a>
+  </header>
+  <!-- Preview image figure-->
+  <figure class="mb-4">
+    <img class="img-fluid rounded" [src]="blogs?.image" alt="..." />
+  </figure>
+  <!-- Post content-->
+  <section class="mb-5">
+    <p class="fs-5 mb-4">
+      {{ blogs?.content }}
+    </p>
+  </section>
+</article>

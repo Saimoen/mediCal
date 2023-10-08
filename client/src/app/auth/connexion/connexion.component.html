@@ -1,0 +1,39 @@
+<div class="connexion text-center">
+  <main class="form-signin w-100 m-auto" style="min-height: 78vh">
+    <form [formGroup]="form" (submit)="submit()">
+      <img class="img-fluid" src="../../../assets/images/connexion.png" alt="" />
+
+      <div class="form-floating mb-3">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingInput"
+          placeholder="Veuillez renseigner une adresse e-mail"
+          formControlName="email"
+        />
+        <label for="floatingInput">E-Mail</label>
+        <mat-error *ngIf="form.get('email')?.errors?.['required']">
+          Veuillez renseigner une adresse e-mail.
+        </mat-error>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Veuillez renseigner un mot de passe"
+          formControlName="password"
+        />
+        <label for="floatingPassword">Mot de passe</label>
+        <mat-error *ngIf="form.get('password')?.errors?.['required']">
+          Veuillez renseigner un mot de passe.
+        </mat-error>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">
+        Se connecter
+      </button>
+      <p class="mt-5 mb-3 text-body-secondary">&copy; DWWM 2023 - Made with ❤️</p>
+    </form>
+  </main>
+</div>

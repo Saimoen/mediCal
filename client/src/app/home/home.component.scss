@@ -1,0 +1,26 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  color: rgb(var(--bs-tertiary-color-rgb));
+}
+
+.content {
+  max-width: 1000px;
+  margin-top: 20px;
+}
+
+.profile-container {
+  width: 30%;
+  max-width: 300px;
+}
+
+.jumbotron {
+  background-image: url(../../assets/images/jumbotron.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

@@ -1,0 +1,32 @@
+<main>
+  <!-- Page header with logo and tagline-->
+  <header class="py-5 bg-light border-bottom mb-4 jumbotron img-fluid">
+    <div class="container">
+      <div class="text-center my-5">
+        <h1 class="fw-bolder text-light">Bienvenue sur Cagou Ouh!</h1>
+        <p class="lead mb-0 text-light">
+          Découvrez l'île la plus proche du paradis
+        </p>
+      </div>
+    </div>
+  </header>
+  <!-- Page content-->
+  <div class="container">
+    <div class="row">
+      <!-- Blog entries-->
+      <div class="col-lg-8">
+        <!-- Featured blog post-->
+        <app-marketing></app-marketing>
+        <!-- Nested row for non-featured blog posts-->
+        <app-feed [blogs]="blogs"></app-feed>
+        <!-- Pagination-->
+        <!--   <app-carousel></app-carousel> -->
+      </div>
+      <!-- Side widgets-->
+      <div class="col-lg-4">
+        <app-form [user]="user"></app-form>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</main>
