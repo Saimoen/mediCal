@@ -22,11 +22,10 @@ router.post("/connexion", async (req, res) => {
     // Recherchez l'utilisateur par son email
     const query = "SELECT * FROM medecin WHERE email = ? LIMIT 1"; // Remplacez "medecin" par le nom de votre table MySQL
     const [user] = await connection.promise().query(query, [email]);
-    const hashedPassword = await bcrypt.hash(password);
 
-    if (user.length > 0 && bcrypt.compareSync(hashedPassword, user[0].password)) {
+    if (user.length > 0 && bcrypt.compareSync(password, user[0].mot_de_passe)) {
       const token = jsonwebtoken.sign({}, RSA_PRIVATE, {
-        subject: user[0].id.toString(),
+        subject: user[0].medecin_id.toString(),
         algorithm: "RS256",
         expiresIn: 60 * 60 * 24 * 30 * 6,
       });
