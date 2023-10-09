@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Comment = require("../database/models/comment.model");
+const Comment = require("../database/models/rendezvous.model");
 
 router.post("/:postId", async (req, res) => {
   try {

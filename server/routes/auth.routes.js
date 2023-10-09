@@ -1,27 +1,42 @@
 const router = require("express").Router();
-const User = require("../database/models/user.model");
+const User = require("../database/models/medecin.model");
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 const fs = require("fs");
+const mysql = require("mysql2");
+
+const connection = mysql.createConnection({
+  host: "localhost", // L'adresse de votre serveur MySQL
+  user: "root",
+  password: "root",
+  database: "medical",
+});
 
 const RSA_PUB = fs.readFileSync("./rsa/key.pub");
 const RSA_PRIVATE = fs.readFileSync("./rsa/key");
 
 router.post("/connexion", async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email }).exec();
-    if (user && bcrypt.compareSync(req.body.password, user.password)) {
+    const { email, password } = req.body;
+
+    // Recherchez l'utilisateur par son email
+    const query = "SELECT * FROM medecin WHERE email = ? LIMIT 1"; // Remplacez "medecin" par le nom de votre table MySQL
+    const [user] = await connection.promise().query(query, [email]);
+    const hashedPassword = await bcrypt.hash(password);
+
+    if (user.length > 0 && bcrypt.compareSync(hashedPassword, user[0].password)) {
       const token = jsonwebtoken.sign({}, RSA_PRIVATE, {
-        subject: user._id.toString(),
+        subject: user[0].id.toString(),
         algorithm: "RS256",
         expiresIn: 60 * 60 * 24 * 30 * 6,
       });
       res.cookie("token", token, { httpOnly: true });
-      return res.json(user);
+      return res.json(user[0]);
     } else {
       return res.status(401).json("Mauvais email ou mot de passe");
     }
   } catch (e) {
+    console.error(e);
     return res.status(401).json("Mauvais email ou mot de passe");
   }
 });
@@ -37,11 +52,14 @@ router.get("/currentuser", async (req, res) => {
     try {
       const decodedToken = jsonwebtoken.verify(token, RSA_PUB);
       if (decodedToken) {
-        const user = await User.findById(decodedToken.sub)
-          .select("-password -__v")
-          .exec();
-        if (user) {
-          res.json(user);
+        const userId = decodedToken.sub;
+
+        // Récupérez l'utilisateur par son ID
+        const query = "SELECT id, nom, prenom, email FROM medecin WHERE id = ?"; // Remplacez "medecin" par le nom de votre table MySQL
+        const [user] = await connection.promise().query(query, [userId]);
+
+        if (user.length > 0) {
+          res.json(user[0]);
         } else {
           res.json(null);
         }
@@ -49,7 +67,7 @@ router.get("/currentuser", async (req, res) => {
         res.json(null);
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
       res.json(null);
     }
   } else {

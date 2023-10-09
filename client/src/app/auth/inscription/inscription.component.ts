@@ -12,6 +12,7 @@ export class InscriptionComponent implements OnInit {
   public form: FormGroup = this.fb.group({
     email: ['', Validators.required],
     name: ['', Validators.required],
+    prenom: ['', Validators.required],
     password: ['', Validators.required],
   });
   public error!: string;

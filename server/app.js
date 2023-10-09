@@ -4,7 +4,7 @@ const path = require("path");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const mysql = require("mysql2");
 const app = express();
 const routes = require("./routes");
 
@@ -19,19 +19,22 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(routes);
 
 /* Permet la connexion à la base de donnée */
-mongoose
-  .connect(
-    "mongodb+srv://GreksO:Gregsaimoen12@meanapp.u4r8eht.mongodb.net/meanApp",
-    {
-      useNewUrlParser: true,
-    }
-  )
-  .then(() => {
-    console.log("Connexion opened to mongodb!");
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+const connection = mysql.createConnection({
+  host: "localhost", // L'adresse de votre serveur MySQL
+  user: "root",
+  password: "root",
+  database: "medical",
+});
+
+connection.connect((err) => {
+  if (err) {
+    console.error("Erreur de connexion à MySQL : " + err.stack);
+    return;
+  }
+  console.log("Connecté à MySQL en tant qu'ID " + connection.threadId);
+});
+
+module.exports = connection;
 
 /* Requête get => return index.html */
 app.get("*", (req, res) => {

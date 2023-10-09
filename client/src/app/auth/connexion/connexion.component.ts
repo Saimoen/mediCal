@@ -25,6 +25,7 @@ export class ConnexionComponent implements OnInit {
 
   public submit() {
     if (this.form.valid) {
+      console.log(this.form.getRawValue())
       this.authService.connexion(this.form.getRawValue()).subscribe({
         next: () => this.router.navigateByUrl('/profil'),
         error: (err) =>
