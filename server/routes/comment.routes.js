@@ -1,36 +1,59 @@
 const router = require("express").Router();
 const Comment = require("../database/models/rendezvous.model");
+const mysql = require('mysql2/promise');
+const express = require('express');
+const connection = require('../app')
 
-router.post("/:postId", async (req, res) => {
+// Configuration de la connexion à la base de données MySQL
+const dbConfig = {
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'medical',
+};
+
+router.post('/post', async (req, res) => {
   try {
-    const postId = req.params.postId;
-    const userId = req.session.userId; // Récupérer l'ID de l'utilisateur connecté depuis la session
+    const nomPrenom = req.body.patient;
+    const date = req.body.date;
+    const motif = req.body.motif;
+    const connection = await mysql.createConnection(dbConfig)
+    // Insérer le rendez-vous dans la table "rendezvous"
+    const insertQuery = 'INSERT INTO rendezvous (patient, date_et_heure, motif) VALUES (?, ?, ?)';
+  
 
-    const comment = new Comment({
-      content: req.body.comment,
-      postId, // Associez l'ID du post au champ postId
-      userId
+    connection.query(insertQuery, [nomPrenom, date, motif], (error, results) => {
+      if (error) {
+        console.error('Erreur lors de l\'insertion du rendez-vous: ' + error);
+        res.status(500).json({ message: 'Une erreur s\'est produite.' });
+      } else {
+        // Envoi d'une réponse réussie
+        res.status(201).json({ message: 'Rendez-vous ajouté avec succès.' });
+      }
     });
-
-    await comment.save();
-
-    res.status(201).json(comment);
-  }  catch (err) {
-    console.error(err); // Affichez l'erreur dans la console du serveur
-    res.status(500).json({ message: "Une erreur s'est produite." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Une erreur s\'est produite.' });
   }
 });
 
-router.get("/:postId", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const postId = req.params.postId;
+    // Établissement d'une connexion à la base de données
+    const connection = await mysql.createConnection(dbConfig);
 
-    const comments = await Comment.find({ postId });
+    // Remplacez ceci par votre requête SQL pour récupérer les commentaires
+    const [comments] = await connection.execute('SELECT * FROM rendezvous');
+
+    // Fermez la connexion après avoir récupéré les données
+    connection.end();
 
     res.json(comments);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: err.message });
   }
 });
+
 
 module.exports = router;

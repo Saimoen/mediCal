@@ -20,7 +20,7 @@ const RendezVous = sequelize.define("rendezvous", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  date_et_heure: DataTypes.DATE,
+  date_et_heure: DataTypes.STRING,
   motif: DataTypes.STRING,
   duree: DataTypes.STRING,
   created_at: {
