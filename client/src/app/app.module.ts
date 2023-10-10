@@ -14,9 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
-import { PostComponent } from './post/post.component';
-import { ArticleComponent } from './post/article/article.component';
-import { CommentComponent } from './post/comment/comment.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -27,9 +24,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     ProfileComponent,
     ConnexionComponent,
     InscriptionComponent,
-    PostComponent,
-    ArticleComponent,
-    CommentComponent,
   ],
   imports: [
     BrowserModule,

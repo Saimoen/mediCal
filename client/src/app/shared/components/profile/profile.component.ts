@@ -14,27 +14,24 @@ export class ProfileComponent implements OnInit {
   public userName: string | undefined = '';
   public commentContent!: FormGroup;
 
-  constructor(private authService: AuthService,
-              private form: FormBuilder
-              ) {}
+  constructor(private authService: AuthService, private form: FormBuilder) {}
 
   ngOnInit(): void {
     this.commentContent = this.form.group({
       date: '',
       prenom: '',
-      nom: ''
+      nom: '',
     });
   }
 
   getName() {
-    if(this.user$) {
-      this.user$.forEach(user => this.userName = user?.name);
-    } 
+    if (this.user$) {
+      this.user$.forEach((user) => (this.userName = user?.nom));
+    }
     return this.userName;
   }
 
   reserverRdv() {
-    console.log(this.commentContent.value)
+    console.log(this.commentContent.value);
   }
-
 }

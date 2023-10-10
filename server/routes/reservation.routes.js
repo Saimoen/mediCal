@@ -1,8 +1,6 @@
 const router = require("express").Router();
 const Comment = require("../database/models/rendezvous.model");
 const mysql = require('mysql2/promise');
-const express = require('express');
-const connection = require('../app')
 
 // Configuration de la connexion à la base de données MySQL
 const dbConfig = {

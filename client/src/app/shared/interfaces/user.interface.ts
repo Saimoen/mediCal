@@ -1,7 +1,7 @@
 export interface User {
-  _id?: string;
-  name: string;
+  medecin_id?: number;
+  nom: string;
   prenom: string;
   email: string;
-  password?: string;
+  mot_de_passe: string;
 }
