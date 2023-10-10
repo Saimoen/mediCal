@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { SuccessComponent } from './shared/components/success/success.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     ProfileComponent,
     ConnexionComponent,
     InscriptionComponent,
+    SuccessComponent
   ],
   imports: [
     BrowserModule,

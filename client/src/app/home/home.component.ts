@@ -8,6 +8,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -23,20 +24,15 @@ export class HomeComponent implements OnInit {
   public form: FormGroup = this.fb.group({
     patient: ['', Validators.required],
     date: ['', Validators.required],
-    motif: ['', Validators.required]
+    motif: ['', Validators.required],
   });
   public calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
-    plugins: [
-      interactionPlugin,
-      dayGridPlugin,
-      timeGridPlugin,
-      listPlugin
-    ],
-        headerToolbar: {
+    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
+    headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
     weekends: true,
     events: [], // Initialisez le tableau d'événements vide
@@ -47,6 +43,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private reservationService: ReservationService,
+    private router: Router,
     private fb: FormBuilder
   ) {}
 
@@ -73,7 +70,7 @@ export class HomeComponent implements OnInit {
   // Méthode pour mettre à jour les événements en fonction de l'état de l'utilisateur
   private updateEvents() {
     this.events = this.rendezVousList;
-  
+
     // Mettez à jour la propriété calendarOptions
     this.calendarOptions = {
       ...this.calendarOptions,
@@ -83,14 +80,19 @@ export class HomeComponent implements OnInit {
 
   public submit() {
     if (this.form.valid) {
-      console.log(this.form.getRawValue())
+      console.log(this.form.getRawValue());
       this.reservationService.inscription(this.form.getRawValue()).subscribe({
-        next: () => window.location.reload(),
+        next: () => console.log('Rendez vous enregistré !'),
         error: (err) =>
           (this.error = err?.error || 'Mauvais mot de passe / email'),
       });
     }
   }
+
+  public redirect() {
+    this.router.navigateByUrl('/success')
+  }
+
 
 
 }

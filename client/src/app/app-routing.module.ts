@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './shared/components/profile/profile.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { DataUserGuard } from './shared/guards/data-user.guard';
+import { SuccessComponent } from './shared/components/success/success.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
     path: 'inscription',
     canActivate: [DataUserGuard],
     component: InscriptionComponent,
+  },
+  {
+    path: 'success',
+    component: SuccessComponent,
   },
   {
     path: 'profil',
