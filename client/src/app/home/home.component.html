@@ -1,32 +1,39 @@
 <main>
-  <!-- Page header with logo and tagline-->
-  <header class="py-5 bg-light border-bottom mb-4 jumbotron img-fluid">
-    <div class="container">
-      <div class="text-center my-5">
-        <h1 class="fw-bolder text-light">Bienvenue sur Cagou Ouh!</h1>
-        <p class="lead mb-0 text-light">
-          Découvrez l'île la plus proche du paradis
-        </p>
-      </div>
-    </div>
-  </header>
   <!-- Page content-->
   <div class="container">
-    <div class="row">
-      <!-- Blog entries-->
-      <div class="col-lg-8">
-        <!-- Featured blog post-->
-        <app-marketing></app-marketing>
-        <!-- Nested row for non-featured blog posts-->
-        <app-feed [blogs]="blogs"></app-feed>
-        <!-- Pagination-->
-        <!--   <app-carousel></app-carousel> -->
-      </div>
-      <!-- Side widgets-->
-      <div class="col-lg-4">
-        <app-form [user]="user"></app-form>
+    <div class="row pt-3">
+      <div class="col-lg-12">
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          <i class="fa-solid fa-plus"></i> Réserver rendez-vous
+        </button>
+        <div class="collapse pt-2" id="collapseExample">
+          <div class="card card-body">
+            <form [formGroup]="form">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nom/Prénom</label>
+                <input type="text" formControlName="patient" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input type="datetime-local" formControlName="date" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="date" class="form-label">Motif</label>
+                <input type="text" formControlName="motif" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary" (click)="submit()">Réserver</button>
+            </form>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div class="row pt-3">
+      <div class="col-lg-12">
+        <full-calendar [options]="calendarOptions" [events]="events"></full-calendar>
+      </div>  
+ 
       </div>
     </div>
-  </div>
+  <!-- </div> -->
   <app-footer></app-footer>
 </main>

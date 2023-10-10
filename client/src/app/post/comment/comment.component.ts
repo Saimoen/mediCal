@@ -26,7 +26,7 @@ export class CommentComponent implements OnInit {
 
   postComment() {
     this.commentService
-      .inscription(this.idBlog, this.commentContent?.value)
+      .inscription(this.idBlog)
       .subscribe({
         next: (comment) => console.log(comment),
         error: (err) => console.log(err),

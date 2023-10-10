@@ -9,11 +9,15 @@ import { Comment } from '../interfaces/comment.interface';
 export class CommentService {
   constructor(private http: HttpClient) {}
 
-  public inscription(id: string | null, data: any): Observable<any> {
-    return this.http.post(`/api/comment/${id}`, data);
+  public inscription(data: any): Observable<any> {
+    return this.http.post(`/api/comment/post`, data);
   }
 
   public getCommentByID(id: string | null): Observable<any> {
     return this.http.get(`/api/comment/${id}`);
+  }
+
+  public getRendezVous(): Observable<any> {
+    return this.http.get('api/comment')
   }
 }

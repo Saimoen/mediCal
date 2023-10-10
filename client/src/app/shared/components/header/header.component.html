@@ -19,14 +19,14 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <p class="nav-link active arimo" aria-current="page"
+          <a routerLink="/" class="nav-link active arimo" aria-current="page"
             >Bienvenue !
-          </p>
+        </a>
         </li>
       </ul>
       <ul *ngIf="!user" class="navbar-nav">
         <li class="m-10">
-          <a routerLink="/" class="nav-link">Connexion</a>
+          <a routerLink="connexion" class="nav-link">Connexion</a>
         </li>
         <li class="m-10">
           <a routerLink="inscription" class="nav-link">Inscription</a>

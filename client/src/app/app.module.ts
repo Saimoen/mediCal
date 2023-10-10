@@ -17,6 +17,7 @@ import { HomeModule } from './home/home.module';
 import { PostComponent } from './post/post.component';
 import { ArticleComponent } from './post/article/article.component';
 import { CommentComponent } from './post/comment/comment.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CommentComponent } from './post/comment/comment.component';
     HttpClientModule,
     SharedModule,
     HomeModule,
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
