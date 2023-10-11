@@ -47,7 +47,7 @@ Pour lancer le projet en local :
 
 - II. Acceder maintenant au dossier server :
 ```bash
-  cd client
+  cd server
   mkdir rsa
   cd rsa
   ssh-keygen -t rsa -b 4096 -m PEM -f key
