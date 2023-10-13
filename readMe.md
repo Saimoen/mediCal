@@ -56,7 +56,7 @@ Pour lancer le projet en local :
 Ces commandes sont importantes pour avoir une authentification JWT fonctionnels.
 Une fois que vous avez vos clés, il suffit de lancer le serveur :
 ```bash
-  cd client
+  cd server
   npm start
 ```
 
